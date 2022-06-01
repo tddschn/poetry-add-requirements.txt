@@ -14,6 +14,7 @@ Add dependencies specified in requirements.txt file(s) to your Poetry project
 
 - Auto detect charset of requirements.txt file(s) and feed normalized dependency specs to `poetry`.
 - Stop on first `poetry add` error.
+- Ignore dependency version requirements specified in requirements.txt file(s).
 ## Installation
 
 ### pipx
@@ -39,7 +40,7 @@ Run `poetry-add-requirements.txt`, optionally specify your requirements.txt file
 ```
 $ poeareq --help
 
-usage: poeareq [-h] [-D] [requirements.txt files ...]
+usage: poetry-add-requirements.txt [-h] [-D] [-I] [-V] [requirements.txt files ...]
 
 Add dependencies specified in requirements.txt to your Poetry project
 
@@ -50,6 +51,9 @@ positional arguments:
 options:
   -h, --help            show this help message and exit
   -D, --dev             Add to development dependencies (default: False)
+  -I, --ignore-version-requirements
+                        Ignore dependency version requirements in requirements.txt file(s) (default: False)
+  -V, --version         show program's version number and exit
 ```
 
 

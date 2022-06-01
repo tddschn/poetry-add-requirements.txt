@@ -7,6 +7,9 @@ Purpose: Add dependencies specified in requirements.txt file(s) to your Poetry p
 
 import argparse
 from pathlib import Path
+from . import __version__, __app_name__
+
+# PYPI_NAME_PATTERN = r'([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])'
 
 
 # --------------------------------------------------
@@ -14,6 +17,7 @@ def get_args():
     """Get command-line arguments"""
 
     parser = argparse.ArgumentParser(
+        prog=__app_name__,
         description='Add dependencies specified in requirements.txt to your Poetry project',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
@@ -29,6 +33,17 @@ def get_args():
 
     parser.add_argument(
         '-D', '--dev', help='Add to development dependencies', action='store_true'
+    )
+
+    parser.add_argument(
+        '-I',
+        '--ignore-version-requirements',
+        help='Ignore dependency version requirements in requirements.txt file(s)',
+        action='store_true',
+    )
+
+    parser.add_argument(
+        '-V', '--version', action='version', version=f'%(prog)s {__version__}'
     )
 
     return parser.parse_args()
@@ -48,7 +63,7 @@ def poetry_add(dep: str, dev: bool = False):
         raise Exception(f'Failed to add dependency {dep} with {" ".join(cmd)}')
 
 
-def process_req_file(req_file: Path, dev: bool):
+def process_req_file(req_file: Path, dev: bool, ignore_version_requirements: bool):
     b = req_file.read_bytes()
     from charset_normalizer import detect
 
@@ -56,6 +71,15 @@ def process_req_file(req_file: Path, dev: bool):
     for line in b.decode(encoding).splitlines():
         dep = line.strip()
         if dep:
+            if ignore_version_requirements:
+                import re
+
+                # https://peps.python.org/pep-0508/
+                # pypi_name_pattern = re.compile(r'([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])', re.IGNORECASE)
+                match = re.match(r'([\w][\w\d\._-]*)', dep)
+                if match is None or match.groups()[0] == '':
+                    continue
+                dep = match.groups()[0]
             poetry_add(dep, dev)
 
 
@@ -66,10 +90,11 @@ def main():
     args = get_args()
     req_files = args.requirements_txt_file
     dev = args.dev
+    ignore_version_requirements = args.ignore_version_requirements
     if isinstance(req_files, Path):
         req_files = [req_files]
     for req_file in req_files:
-        process_req_file(req_file, dev)
+        process_req_file(req_file, dev, ignore_version_requirements)
 
 
 # --------------------------------------------------
