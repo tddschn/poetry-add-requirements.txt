@@ -6,11 +6,7 @@ Purpose: Add dependencies specified in requirements.txt to your Poetry project
 """
 
 import argparse
-import encodings
-
-import subprocess
 from pathlib import Path
-from charset_normalizer import detect
 
 
 # --------------------------------------------------
@@ -40,6 +36,8 @@ def get_args():
 
 def poetry_add(dep: str, dev: bool = False):
     """Add dependency with Poetry"""
+    import subprocess
+
     cmd = ['poetry', 'add']
     if dev:
         cmd.append('-D')
@@ -52,6 +50,8 @@ def poetry_add(dep: str, dev: bool = False):
 
 def process_req_file(req_file: Path, dev: bool):
     b = req_file.read_bytes()
+    from charset_normalizer import detect
+
     encoding: str = detect(b)['encoding']  # type: ignore
     for line in b.decode(encoding).splitlines():
         dep = line.strip()
