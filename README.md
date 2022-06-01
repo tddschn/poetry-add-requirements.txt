@@ -1,6 +1,6 @@
 # poetry-add-requirements.txt
 
-Add dependencies specified in requirements.txt to your Poetry project
+Add dependencies specified in requirements.txt file(s) to your Poetry project
 
 - [poetry-add-requirements.txt](#poetry-add-requirementstxt)
   - [Features](#features)
