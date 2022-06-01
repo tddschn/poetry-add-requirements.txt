@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "poetry-add-requirements.txt"
+version = "0.1.0"
+description = ""
+authors = ["Xinyuan Chen <45612704+tddschn@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/tddschn/poetry-add-requirements.txt"
+repository = "https://github.com/tddschn/poetry-add-requirements.txt"
+classifiers = [
+    "Topic :: Utilities"
+]
+keywords = ["poetry", "requirements.txt"]
+
+[tool.poetry.scripts]
+"poetry-add-requirements.txt" = "poetry_add_requirements_txt.cli:main"
+"poeareq" = "poetry_add_requirements_txt.cli:main"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/tddschn/poetry-add-requirements.txt/issues"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+charset-normalizer = "^2.0.12"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^22.3.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
