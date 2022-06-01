@@ -64,6 +64,7 @@ def poetry_add(dep: str, dev: bool = False):
 
 
 def process_req_file(req_file: Path, dev: bool, ignore_version_requirements: bool):
+    print(f'Reading requirements file: {str(req_file)}')
     b = req_file.read_bytes()
     from charset_normalizer import detect
 
