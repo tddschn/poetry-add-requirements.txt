@@ -3,12 +3,17 @@
 Add dependencies specified in requirements.txt to your Poetry project
 
 - [poetry-add-requirements.txt](#poetry-add-requirementstxt)
+  - [Features](#features)
   - [Installation](#installation)
     - [pipx](#pipx)
     - [pip](#pip)
   - [Usage](#usage)
   - [Develop](#develop)
 
+## Features
+
+- Auto detect charset of requirements.txt file(s) and feed normalized dependency specs to `poetry`.
+- Stop on first `poetry add` error.
 ## Installation
 
 ### pipx
