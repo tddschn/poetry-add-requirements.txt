@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "poetry-add-requirements.txt"
-version = "1.0.0"
+version = "1.0.1"
 description = "Add dependencies specified in requirements.txt to your Poetry project"
 authors = ["Xinyuan Chen <45612704+tddschn@users.noreply.github.com>"]
 license = "MIT"
