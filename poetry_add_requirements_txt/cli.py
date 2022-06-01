@@ -2,7 +2,7 @@
 """
 Author : Xinyuan Chen <45612704+tddschn@users.noreply.github.com>
 Date   : 2022-06-01
-Purpose: Add dependencies specified in requirements.txt to your Poetry project
+Purpose: Add dependencies specified in requirements.txt file(s) to your Poetry project
 """
 
 import argparse
