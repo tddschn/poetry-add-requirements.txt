@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "poetry-add-requirements.txt"
-version = "0.1.1"
+version = "0.1.2"
 description = ""
 authors = ["Xinyuan Chen <45612704+tddschn@users.noreply.github.com>"]
 license = "MIT"
