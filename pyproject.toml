@@ -7,9 +7,7 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/tddschn/poetry-add-requirements.txt"
 repository = "https://github.com/tddschn/poetry-add-requirements.txt"
-classifiers = [
-    "Topic :: Utilities"
-]
+classifiers = ["Topic :: Utilities"]
 keywords = ["poetry", "requirements.txt"]
 
 [tool.poetry.scripts]
@@ -20,7 +18,7 @@ keywords = ["poetry", "requirements.txt"]
 "Bug Tracker" = "https://github.com/tddschn/poetry-add-requirements.txt/issues"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10, <4.0"
 charset-normalizer = "^2.0.12"
 
 [tool.poetry.dev-dependencies]
