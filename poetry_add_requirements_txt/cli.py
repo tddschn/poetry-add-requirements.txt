@@ -7,7 +7,8 @@ Purpose: Add dependencies specified in requirements.txt file(s) to your Poetry p
 
 import argparse
 from pathlib import Path
-from . import __version__, __app_name__
+from poetry_add_requirements_txt import __version__, __app_name__
+from poetry_add_requirements_txt.utils import preprocess_line
 
 # PYPI_NAME_PATTERN = r'([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])'
 
@@ -70,7 +71,7 @@ def process_req_file(req_file: Path, dev: bool, ignore_version_requirements: boo
 
     encoding: str = detect(b)['encoding']  # type: ignore
     for line in b.decode(encoding).splitlines():
-        dep = line.strip()
+        dep = preprocess_line(line)
         if dep:
             if ignore_version_requirements:
                 import re
