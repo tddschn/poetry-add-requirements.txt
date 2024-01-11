@@ -40,20 +40,23 @@ Run `poetry-add-requirements.txt`, optionally specify your requirements.txt file
 ```
 $ poeareq --help
 
-usage: poetry-add-requirements.txt [-h] [-D] [-I] [-V] [requirements.txt files ...]
+usage: poetry-add-requirements.txt [-h] [-D] [-I] [-i] [-V] [requirements.txt file(s) ...] ...
 
 Add dependencies specified in requirements.txt to your Poetry project
 
 positional arguments:
   requirements.txt file(s)
                         Path(s) to your requirements.txt file(s) (default: requirements.txt)
+  poetry_args           Poetry args, pass them after -- at the end of the command
 
 options:
   -h, --help            show this help message and exit
   -D, --dev             Add to development dependencies (default: False)
   -I, --ignore-version-requirements
                         Ignore dependency version requirements in requirements.txt file(s) (default: False)
+  -i, --ignore-errors   Ignore errors (default: False)
   -V, --version         show program's version number and exit
+  
 ```
 
 
