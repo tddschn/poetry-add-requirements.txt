@@ -84,6 +84,7 @@ def process_req_file(
     req_file: Path,
     dev: bool,
     ignore_version_requirements: bool,
+    ignore_errors: bool,  # New parameter
     poetry_extra_args: list | None = None,
 ):
     print(f"Reading requirements file: {str(req_file)}")
@@ -92,21 +93,24 @@ def process_req_file(
 
     encoding: str = detect(b)["encoding"]  # type: ignore
     for line in b.decode(encoding).splitlines():
-        dep = preprocess_line(line)
-        if dep:
-            if ignore_version_requirements:
-                import re
+        try:
+            dep = preprocess_line(line)
+            if dep:
+                if ignore_version_requirements:
+                    import re
 
-                # https://peps.python.org/pep-0508/
-                # pypi_name_pattern = re.compile(r'([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])', re.IGNORECASE)
-                match = re.match(r"([\w][\w\d\._-]*)", dep)
-                if match is None or match.groups()[0] == "":
-                    continue
-                dep = match.groups()[0]
-            poetry_add(dep, dev, poetry_extra_args)
+                    match = re.match(r"([\w][\w\d\._-]*)", dep)
+                    if match is None or match.groups()[0] == "":
+                        continue
+                    dep = match.groups()[0]
+                poetry_add(dep, dev, poetry_extra_args)
+        except Exception as e:
+            if ignore_errors:
+                print(f"Error processing '{line}': {e}")
+            else:
+                raise
 
 
-# --------------------------------------------------
 def main():
     """Make a jazz noise here"""
 
@@ -114,6 +118,7 @@ def main():
     req_files = args.requirements_txt_file
     dev = args.dev
     ignore_version_requirements = args.ignore_version_requirements
+    ignore_errors = args.ignore_errors  # Capture the ignore_errors flag
     poetry_extra_args = (
         args.poetry_args[1:] if args.poetry_args and args.poetry_args[0] == "--" else []
     )
@@ -121,9 +126,10 @@ def main():
     if isinstance(req_files, Path):
         req_files = [req_files]
     for req_file in req_files:
-        process_req_file(req_file, dev, ignore_version_requirements, poetry_extra_args)
+        process_req_file(
+            req_file, dev, ignore_version_requirements, ignore_errors, poetry_extra_args
+        )  # Pass ignore_errors flag
 
 
-# --------------------------------------------------
 if __name__ == "__main__":
     main()
