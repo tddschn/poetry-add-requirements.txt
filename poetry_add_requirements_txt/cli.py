@@ -47,19 +47,25 @@ def get_args():
         "-i", "--ignore-errors", help="Ignore errors", action="store_true"
     )
 
+    parser.add_argument(
+        "-n", "--dry-run", action="store_true", help="Dry run, do not add dependencies"
+    )
     # parser.add_argument(
     #     "-p", "--poetry-args", help="Additional arguments to pass to Poetry", nargs="*"
     # )
     # undocumented feature
+    # parser.add_argument(
+    #     "poetry_args",
+    #     nargs=argparse.REMAINDER,
+    #     help="Poetry args, pass them after -- at the end of the command",
+    # )
     parser.add_argument(
-        "poetry_args",
+        "--poetry-args",
+        dest="poetry_args",
+        help="Additional arguments to pass to Poetry, passed after a '--'",
         nargs=argparse.REMAINDER,
-        help="Poetry args, pass them after -- at the end of the command",
     )
 
-    parser.add_argument(
-        "-n", "--dry-run", action="store_true", help="Dry run, do not add dependencies"
-    )
     parser.add_argument(
         "-V", "--version", action="version", version=f"%(prog)s {__version__}"
     )
@@ -130,9 +136,10 @@ def main():
     dev = args.dev
     ignore_version_requirements = args.ignore_version_requirements
     ignore_errors = args.ignore_errors  # Capture the ignore_errors flag
-    poetry_extra_args = (
-        args.poetry_args[1:] if args.poetry_args and args.poetry_args[0] == "--" else []
-    )
+    # poetry_extra_args = (
+    #     args.poetry_args[1:] if args.poetry_args and args.poetry_args[0] == "--" else []
+    # )
+    poetry_extra_args = args.poetry_args
 
     if isinstance(req_files, Path):
         req_files = [req_files]
