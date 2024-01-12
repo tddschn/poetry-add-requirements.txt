@@ -50,19 +50,12 @@ def get_args():
     parser.add_argument(
         "-n", "--dry-run", action="store_true", help="Dry run, do not add dependencies"
     )
-    # parser.add_argument(
-    #     "-p", "--poetry-args", help="Additional arguments to pass to Poetry", nargs="*"
-    # )
-    # undocumented feature
-    # parser.add_argument(
-    #     "poetry_args",
-    #     nargs=argparse.REMAINDER,
-    #     help="Poetry args, pass them after -- at the end of the command",
-    # )
+
     parser.add_argument(
+        "-p",
         "--poetry-args",
         dest="poetry_args",
-        help="Additional arguments to pass to Poetry, passed after a '--'",
+        help="Additional arguments to pass to Poetry, put this at the END of the command",
         nargs=argparse.REMAINDER,
     )
 
