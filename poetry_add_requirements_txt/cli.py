@@ -58,13 +58,21 @@ def get_args():
     )
 
     parser.add_argument(
+        "-n", "--dry-run", action="store_true", help="Dry run, do not add dependencies"
+    )
+    parser.add_argument(
         "-V", "--version", action="version", version=f"%(prog)s {__version__}"
     )
 
     return parser.parse_args()
 
 
-def poetry_add(dep: str, dev: bool = False, poetry_extra_args: list | None = None):
+def poetry_add(
+    dep: str,
+    dev: bool = False,
+    poetry_extra_args: list | None = None,
+    dry_run: bool = False,
+):
     """Add dependency with Poetry"""
     import subprocess
 
@@ -75,6 +83,8 @@ def poetry_add(dep: str, dev: bool = False, poetry_extra_args: list | None = Non
     if poetry_extra_args:
         cmd.extend(poetry_extra_args)
     print(f'Running {" ".join(cmd)}')
+    if dry_run:
+        return
     cp = subprocess.run(cmd)
     if cp.returncode != 0:
         raise Exception(f'Failed to add dependency {dep} with {" ".join(cmd)}')
@@ -86,6 +96,7 @@ def process_req_file(
     ignore_version_requirements: bool,
     ignore_errors: bool,  # New parameter
     poetry_extra_args: list | None = None,
+    dry_run: bool = False,
 ):
     print(f"Reading requirements file: {str(req_file)}")
     b = req_file.read_bytes()
@@ -103,7 +114,7 @@ def process_req_file(
                     if match is None or match.groups()[0] == "":
                         continue
                     dep = match.groups()[0]
-                poetry_add(dep, dev, poetry_extra_args)
+                poetry_add(dep, dev, poetry_extra_args, dry_run)
         except Exception as e:
             if ignore_errors:
                 print(f"Error processing '{line}': {e}")
@@ -127,7 +138,12 @@ def main():
         req_files = [req_files]
     for req_file in req_files:
         process_req_file(
-            req_file, dev, ignore_version_requirements, ignore_errors, poetry_extra_args
+            req_file,
+            dev,
+            ignore_version_requirements,
+            ignore_errors,
+            poetry_extra_args,
+            args.dry_run,
         )  # Pass ignore_errors flag
 
 
