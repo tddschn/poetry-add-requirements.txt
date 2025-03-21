@@ -1,25 +1,36 @@
-# poetry-add-requirements.txt
+# poetry-add-requirements.txt & uv-add-requirements.txt
 
-Add dependencies specified in requirements.txt file(s) to your Poetry project
+Add dependencies specified in requirements.txt file(s) to your Poetry / UV project
 
-- [poetry-add-requirements.txt](#poetry-add-requirementstxt)
+- [poetry-add-requirements.txt \& uv-add-requirements.txt](#poetry-add-requirementstxt--uv-add-requirementstxt)
   - [Features](#features)
   - [Installation](#installation)
+    - [uv](#uv)
     - [pipx](#pipx)
     - [pip](#pip)
   - [Usage](#usage)
+    - [For poetry](#for-poetry)
+    - [For uv](#for-uv)
     - [Usage examples and tips](#usage-examples-and-tips)
   - [Develop](#develop)
 
 ## Features
 
-- Auto detect charset of requirements.txt file(s) and feed normalized dependency specs to `poetry`.
-- Stop on first `poetry add` error.
+- Auto detect charset of requirements.txt file(s) and feed normalized dependency specs to `poetry` / `uv`.
+- Stop on first `poetry / uv add` error.
 - Ignore dependency version requirements specified in requirements.txt file(s).
 - Ignore errors when installing individual dependencies.
-- Pass arbitrary arguments to `poetry add` after `--` at the end of the command.
+- Pass arbitrary arguments to `poetry / uv add` after `--` at the end of the command.
 
 ## Installation
+
+### uv
+
+This is the fastest way to install, or use without permanent installation.
+
+```
+$ uv tool install poetry-add-requirements.txt
+```
 
 ### pipx
 
@@ -36,6 +47,9 @@ $ pip install poetry-add-requirements.txt
 ```
 
 ## Usage
+
+
+### For poetry
 
 Run `poetry-add-requirements.txt`, optionally specify your requirements.txt files and `--dev` for dev dependencies.
 
@@ -68,6 +82,10 @@ options:
   -V, --version         show program's version number and exit
 
 ```
+
+### For uv
+
+Same as above, just change the command to `uv-add-requirements.txt` or `uvareq` (they are equivalent).
 
 ### Usage examples and tips
 
