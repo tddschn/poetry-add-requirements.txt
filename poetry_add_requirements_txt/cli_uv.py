@@ -19,7 +19,7 @@ def get_args():
 
     parser = argparse.ArgumentParser(
         prog=__app_name__,
-        description="Add dependencies specified in requirements.txt to your Poetry project",
+        description="Add dependencies specified in requirements.txt to your UV project",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
 
@@ -55,7 +55,7 @@ def get_args():
         "-p",
         "--poetry-args",
         dest="poetry_args",
-        help="Additional arguments to pass to Poetry, put this at the END of the command",
+        help="Additional arguments to pass to uv, put this at the END of the command",
         nargs=argparse.REMAINDER,
     )
 
@@ -75,7 +75,7 @@ def poetry_add(
     """Add dependency with Poetry"""
     import subprocess
 
-    cmd = ["poetry", "add"]
+    cmd = ["uv", "add"]
     if dev:
         cmd.append("--dev")
     cmd.append(dep)

@@ -13,6 +13,8 @@ keywords = ["poetry", "requirements.txt"]
 [tool.poetry.scripts]
 "poetry-add-requirements.txt" = "poetry_add_requirements_txt.cli:main"
 "poeareq" = "poetry_add_requirements_txt.cli:main"
+"uv-add-requirements.txt" = "poetry_add_requirements_txt.cli_uv:main"
+"uvareq" = "poetry_add_requirements_txt.cli_uv:main"
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/tddschn/poetry-add-requirements.txt/issues"
