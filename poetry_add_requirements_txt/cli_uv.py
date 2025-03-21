@@ -7,7 +7,7 @@ Purpose: Add dependencies specified in requirements.txt file(s) to your Poetry p
 
 import argparse
 from pathlib import Path
-from poetry_add_requirements_txt import __version__, __app_name__
+from poetry_add_requirements_txt import __version__, __app_name_uv__
 from poetry_add_requirements_txt.utils import preprocess_line
 
 # PYPI_NAME_PATTERN = r'([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])'
@@ -18,7 +18,7 @@ def get_args():
     """Get command-line arguments"""
 
     parser = argparse.ArgumentParser(
-        prog=__app_name__,
+        prog=__app_name_uv__,
         description="Add dependencies specified in requirements.txt to your UV project",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
