@@ -12,6 +12,7 @@ Add dependencies specified in requirements.txt file(s) to your Poetry / UV proje
     - [For poetry](#for-poetry)
     - [For uv](#for-uv)
     - [Usage examples and tips](#usage-examples-and-tips)
+  - [Screenshot](#screenshot)
   - [Develop](#develop)
 
 ## Features
@@ -95,6 +96,12 @@ Tips:
 - Put all req files before any options
 - Put `-p`, `--poetry-args` at the end of the command
 - Pass `-n`, `--dry-run` to see the poetry commands that would be run
+
+## Screenshot
+
+Running `uv-add-requirements.txt` without extra args:
+
+![](screenshots/uv-add-requirements.txt-screenshot.png)
 
 ## Develop
 
