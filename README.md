@@ -25,7 +25,7 @@ Add dependencies specified in requirements.txt file(s) to your Poetry / UV proje
 
 ## Installation
 
-The package name are PyPI is `poetry-add-requirements.txt` or `uv-add-requirements.txt`, both are equivalent.
+The package name on PyPI is `poetry-add-requirements.txt` or `uv-add-requirements.txt`, both are equivalent.
 
 They both provide these 4 commands / executables: `poeareq, poetry-add-requirements.txt, uv-add-requirements.txt, uvareq`
 
