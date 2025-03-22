@@ -2,6 +2,8 @@
 
 Add dependencies specified in requirements.txt file(s) to your Poetry / UV project
 
+Can't remember how to use xargs or awk to do the job? This tool is for you, easy to use and comes with extra features.
+
 - [poetry-add-requirements.txt \& uv-add-requirements.txt](#poetry-add-requirementstxt--uv-add-requirementstxt)
   - [Features](#features)
   - [Installation](#installation)
